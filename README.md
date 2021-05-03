@@ -3,7 +3,7 @@ To run the server on your system:
 1. Make sure you have pgAdmin4 installed
 2. Run `git clone https://github.com/nico1029/ticketManagement.git` in your destination folder
 3. Run `go install github.com/nico1029/ticketManagement`
-4. Run `go install` to create the binary (`github.com/nico1029/ticketManagement`)
+4. Run `go build` to create the binary (`github.com/nico1029/ticketManagement`)
 6. Launch the SQL Shell (psql)
 7. Create the database called `ticket_database` in pgAdmin. 
 8. Run the binary :`./ticketManagement`
