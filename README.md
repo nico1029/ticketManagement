@@ -35,4 +35,4 @@ Before running the application, edit the `connString` variable inside the `main`
 When a Query is pulled from the server, it is necesarry to select the .html file to continue. The registered.html file contains lines necessary to display the interface to register a ticket and the deleted.html to delete it. On the other hand, the tickets are filtered acorrding how exactly you input the information. 
 
 TODO
-- Deploy the API with Docker containers 
+- Deploy the API with Docker 
