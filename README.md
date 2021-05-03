@@ -18,7 +18,7 @@ CREATE TABLE registered_tickets (
     fechacreacion VARCHAR(256), 
     fechaactualizacion VARCHAR(256), 
     estatus VARCHAR(256)
-)
+);
 
 CREATE TABLE deleted_tickets (
     numberid SERIAL PRIMARY KEY, 
@@ -27,7 +27,9 @@ CREATE TABLE deleted_tickets (
     fechacreacion VARCHAR(256), 
     fechaactualizacion VARCHAR(256), 
     estatus VARCHAR(256)
-)
+);
 ```
 
-Before running the application, edit the `connString` variable inside the `main` function to specify your postgres database connection. Replace $YOUR_PASSWORD$ with your password used on database
+Before running the application, edit the `connString` variable inside the `main` function to specify your postgres database connection. Replace $YOUR_PASSWORD$ with your password used on database.
+
+When a Query is pulled from the server, it is necesarry to select the .html file to continue. The registered.html file contains lines necessary to display the interface to register a ticket and the deleted.html to delete it. On the other hand, the tickets are filtered acorrding how exactly you input the information. 
