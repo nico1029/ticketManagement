@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ticket Management System</title>
+
+<style>
+  .hide
+        {
+            display: none;
+        }
+
+  table, th, td {
+    border: 1px solid black; 
+    border-collapse: collapse; 
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  * {
+  box-sizing: border-box;
+  }
+
+  label {
+  padding: 5px 12px 12px 0;
+  display: inline-block;
+  }
+    .popup .overlay {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.7);
+    z-index:1;
+    display:none;
+  }
+  
+  .popup .contentr {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:#fff;
+    width:500px;
+    height:250px;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    font-family:"Open Sans",sans-serif;
+    border-radius: 5px;
+  }
+  
+  .popup .contentd {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:#fff;
+    width:500px;
+    height:250px;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    font-family:"Open Sans",sans-serif;
+    border-radius: 5px;
+  }
+
+  .popup .contente {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:#fff;
+    width:500px;
+    height:380px;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    font-family:"Open Sans",sans-serif;
+    border-radius: 5px;
+  }
+
+  .popup .close-btn {
+    cursor:pointer;
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:30px;
+    height:30px;
+    background:#222;
+    color:#fff;
+    font-size:25px;
+    font-weight:600;
+    line-height:30px;
+    text-align:center;
+    border-radius:50%;
+  }
+  
+  .popup.active .overlay {
+    display:block;
+  }
+  
+  .popup.active .contentr {
+    transition:all 300ms ease-in-out;
+    transform:translate(-50%,-50%) scale(1);
+  }
+
+  .popup.active .contentd {
+    transition:all 300ms ease-in-out;
+    transform:translate(-50%,-50%) scale(1);
+  }
+
+  .popup.active .contente {
+    transition:all 300ms ease-in-out;
+    transform:translate(-50%,-50%) scale(1);
+  }
+
+  input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  }
+
+  input[type=submit]:hover {
+  background-color: #45a049;
+  }
+
+  .container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  }
+
+  .col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+  }
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+  }
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  }
+
+  @media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+  } 
+
+  @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+
+.container1 {
+	width: 80%;
+	margin: 0 auto;
+  font-family: 'Work Sans', sans-serif;
+}
+
+header {
+  background: #26225e;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 10px 0;
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+
+  position: relative;
+}
+
+nav a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: rgb(255, 255, 255);
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color:rgb(255, 255, 255);
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+#SearchInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 20%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  border-radius: 5px;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  padding: 12px 20px 12px 20px;
+  font-size: 16px;
+  cursor: inherit;
+  line-height: inherit;
+  border-radius: 5px;
+}
+
+.button2 {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="container1">
+      <h1 class="logo">
+        
+      </h1>
+      <nav>
+        <ul>
+          <li><a href="registered.html">Tiquetes Registrados</a></li>
+          <li><a href="deleted.html">Tiquetes Eliminados</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <h1>Ticket Management System</h1>
+
+  <form action="/ticket/filter" method="post">
+    <p style="font-size:20px">Filtrar por:</p>
+    <select name="filter" id="filter">
+      <option value="id">Id</option>
+      <option value="usuario">Usuario</option>
+      <option value="fechacreacion">Fecha de Creación (01-02-2006)</option>
+      <option value="fechaactualizacion">Fecha de Actualización (01-02-2006)</option>
+      <option value="estatus">Estatus</option>
+    </select>
+    <input type="text" id="SearchInput" name="filter-s" placeholder="Search by type.." title="Type in a name">
+    <button type="submit" class="button2">Filtrar</button>
+    <form action="/ticket/filter/delete" method="post">
+      <button type="submit" class="button2">Borrar Filtro</button>
+    </form>
+  </form>
+
+  
+ 
+  <table style="width:70%">
+    <tr>
+      <th>Id</th>
+      <th>Usuario</th>
+      <th>Fecha de Creación</th>
+      <th>Fecha de Actualización</th>
+      <th>Estatus</th>
+    </tr>
+    </tr>
+  </table>
+  <br/>
+
+  <!-- 
+    Finally, the last section is the script that will
+    run on each page load to fetch the list of birds
+    and add them to our existing table
+   -->
+  <script>
+    ticketTable = document.querySelector("table")
+
+    /*
+    Use the browsers `fetch` API to make a GET call to /bird
+    We expect the response to be a JSON list of birds, of the
+    form :
+    [
+      {"species":"...","description":"..."},
+      {"species":"...","description":"..."}
+    ]
+    */
+    fetch("/ticket")
+      .then(response => response.json())
+      .then(ticketList => {
+        //Once we fetch the list, we iterate over it
+        ticketList.forEach(ticket => {
+          // Create the table row
+          row = document.createElement("tr")
+
+          // Create the table data elements for the species and description columns
+          id = document.createElement("td")
+          id.innerHTML = ticket.id
+          usuario = document.createElement("td")
+          usuario.innerHTML = ticket.usuario
+          fechacreacion = document.createElement("td")
+          fechacreacion.innerHTML = ticket.fechacreacion
+          fechaactualizacion = document.createElement("td")
+          fechaactualizacion.innerHTML = ticket.fechaactualizacion
+          estatus = document.createElement("td")
+          estatus.innerHTML = ticket.estatus
+
+          // Add the data elements to the row
+          row.appendChild(id)
+          row.appendChild(usuario)
+          row.appendChild(fechacreacion)
+          row.appendChild(fechaactualizacion)
+          row.appendChild(estatus)
+          // Finally, add the row element to the table itself
+          ticketTable.appendChild(row)
+        })
+      })
+
+    function toggleRegister(){
+      document.getElementById("popup-register").classList.toggle("active");
+    }
+
+    function toggleDelete(){
+      document.getElementById("popup-delete").classList.toggle("active");
+    }
+
+    function toggleEdit(){
+      document.getElementById("popup-edit").classList.toggle("active");
+    }
+
+  </script>
+
+  <div class="popup" id="popup-register">
+    <div class="overlay"></div>
+    <div class="contentr">
+      <div class="close-btn" onclick="toggleRegister()">&times;</div>
+      <h1>Register System</h1>
+      <div class = "container">
+        <form action="/ticket" method="post">
+          <div class="row">
+            <div class="col-25">
+              <label for="r-user">User</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="r-user" name="usuario">
+            </div>
+          </div>
+          <div class="row">
+            <input type="submit" value="Registrar">
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-delete">
+    <div class="overlay"></div>
+    <div class="contentd">
+      <div class="close-btn" onclick="toggleDelete()">&times;</div>
+      <h1>Delete System</h1>
+      <div class="container">
+        <form action="/ticket/delete" method="post">
+          <div class="row">
+            <div class="col-25">
+              <label for="d-id">ID</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="d-id" name="id">
+            </div>
+          </div>
+          <div class="row">
+            <input type="submit" value="Eliminar">
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-edit">
+    <div class="overlay"></div>
+    <div class="contente">
+      <div class="close-btn" onclick="toggleEdit()">&times;</div>
+      <h1>Edit System</h1>
+      <div class="container">
+        <form action="/ticket/update" method="post">
+          <div class="row">
+            <div class="col-25">
+              <label for="e-id">ID</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="e-id" name="id">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="e-newid">Nuevo ID</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="e-newid" name="newid">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="e-user">User</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="e-user" name="usuario">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="e-status">Estatus</label>
+            </div>
+            <div class="col-75">
+              <select name="estatus" id="estatus">
+                <option value="Abierto">Abierto</option>
+                <option value="Cerrado">Cerrado</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <input type="submit" value="Editar">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <center>
+  <button onclick="toggleRegister()">Nuevo Tiquete</button>
+  <button onclick="toggleDelete()">Eliminar Tiquete</button>
+  <button onclick="toggleEdit()">Editar Tiquete</button>
+  </center>
+
+</html>
